@@ -9,31 +9,43 @@
 </head>
 
 <body>
-	
+
 	<h1 id="hola"></h1>
-	
+
 	<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
 	<script>
-	  // Initialize Firebase
-	  var config = {
-		apiKey: "AIzaSyDRKIAvkfcbyH2IExKtkSQXppuZHYotHJ8",
-		authDomain: "edfirebase-1ab40.firebaseapp.com",
-		databaseURL: "https://edfirebase-1ab40.firebaseio.com",
-		projectId: "edfirebase-1ab40",
-		storageBucket: "edfirebase-1ab40.appspot.com",
-		messagingSenderId: "287355760101"
-	  };
-	  firebase.initializeApp(config);
-	  
-	  const hola = document.getElementById('hola'),
-	  db = firebase.database(),
-	  refText = db.ref().child('text')
-	  
-	  console.log(refText)
-	  
-	  refText.on('value', data => {
-		hola.innerText = data.val()
-	  })
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyDRKIAvkfcbyH2IExKtkSQXppuZHYotHJ8",
+			authDomain: "edfirebase-1ab40.firebaseapp.com",
+			databaseURL: "https://edfirebase-1ab40.firebaseio.com",
+			projectId: "edfirebase-1ab40",
+			storageBucket: "edfirebase-1ab40.appspot.com",
+			messagingSenderId: "287355760101"
+		};
+		firebase.initializeApp(config);
+
+		const hola = document.getElementById('hola'),
+			db = firebase.database(),
+			refText = db.ref().child('text')
+
+		console.log(refText)
+
+		refText.on('value', data => {
+			hola.innerText = data.val()
+		})
+
+		// Push inserta datos agregando un id
+		db.ref().child('data-push').push({
+			message: 'Hola ED TEam insertando datos con el método push'
+		})
+
+		// Set elimina el nodo y agrega los datos sin id
+		db.ref().child('data-set').set({
+			message: 'Hola ED TEam insertando datos con el método push'
+		})
+
 	</script>
 </body>
+
 </html>
